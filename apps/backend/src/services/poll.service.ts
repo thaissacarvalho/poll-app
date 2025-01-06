@@ -2,8 +2,14 @@ import { Poll } from "@poll-app/libs";
 import { PollModel } from "../core/models/poll.model";
 
 export class PollService {
-  async createPoll(data: Partial<Poll>): Promise<Poll> {
-    const poll = new PollModel(data);
+  async createPoll(data: Partial<Poll>, durationInMinutes: number): Promise<Poll> {
+    const expiredAt = new Date();
+    expiredAt.setMinutes(expiredAt.getMinutes() + durationInMinutes); 
+
+    // Adiciona a data de expiração ao objeto `data`
+    const pollData = { ...data, expiredAt };
+
+    const poll = new PollModel(pollData);
     return await poll.save();
   }
 

@@ -38,11 +38,15 @@ export class UserController {
 
   async getUserById(req: Request, res: Response): Promise<void> {
     try {
-      const user = await this.userService.getUserById(req.params.id);
+      const { id } = req.params;
+
+      const user = await this.userService.getUserById(id);
+      
       if (!user) {
         res.status(404).json({ error: 'User not found' });
         return;
       }
+      
       res.status(200).json(user);
     } catch (error) {
       res.status(500).json(error.message);

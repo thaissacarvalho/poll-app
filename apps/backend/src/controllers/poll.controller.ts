@@ -11,10 +11,17 @@ export class PollController {
 
   async createPoll(req: Request, res: Response): Promise<void> {
     try {
-      const poll = await this.pollService.createPoll(req.body);
+      const { durationInMinutes, ...pollData } = req.body;
+
+      // Verifica se a duração foi informada
+      if (!durationInMinutes) {
+        res.status(400).json({ error: "Duração não informada." });
+      }
+
+      const poll = await this.pollService.createPoll(pollData, durationInMinutes);
       res.status(201).json(poll);
     } catch (error) {
-      res.status(500).json(error.message);
+      res.status(500).json({ error: error.message });
     }
   }
 
