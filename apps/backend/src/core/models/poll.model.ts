@@ -33,6 +33,7 @@ PollSchema.methods.isExpired = function (): boolean {
 };
 
 // Indice TTL para expiração automatica do Documento.
-PollSchema.index({ expiredAt: 1 }, { expireAfterSeconds: 0 });
+
+// PollSchema.index({ expiredAt: 1 }, { expireAfterSeconds: 0 });
 
 export const PollModel = model<Poll>('Poll', PollSchema);
