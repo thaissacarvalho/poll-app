@@ -2,10 +2,12 @@ import { Router } from "express";
 import { PollController } from "../controllers/poll.controller";
 import { UserController } from "../controllers/user.controller";
 import { LoginController } from "../controllers/login.controller";
+import { VoteController } from "../controllers/vote.controller";
 
 const pollController = new PollController();
 const userController = new UserController();
 const loginController = new LoginController();
+const voteController = new VoteController();
 
 export const router = Router();
 
@@ -24,22 +26,16 @@ router.put('update-user/:id', userController.updateUser.bind(userController));
 router.delete('/delete-user/:id', userController.deleteUser.bind(userController));
 
 // Poll
-router.post('/create-poll', pollController.createPoll);
-router.get('/find-poll/:id', pollController.getPollById);
-router.get('/find-polls', pollController.getAllPolls);
-// router.put('update-poll/:id', pollController.updatePoll);
-router.delete('/delete-poll/:id', pollController.deletePoll);
-
-// Poll Option
-router.post('/create-poll-option', );
-router.get('/find-poll-option/:id', );
-router.get('/find-poll-options', );
-router.delete('/delete-poll-option/:id', );
+router.post('/create-poll', pollController.createPoll.bind(pollController));
+router.get('/find-poll/:id', pollController.getPollById.bind(pollController));
+router.get('/find-polls', pollController.getAllPolls.bind(pollController));
+router.get('/find-expired-polls', pollController.getExpiredPolls.bind(pollController));
+// router.put('update-poll/:id', pollController.updatePoll.bind(pollController));
+router.delete('/delete-poll/:id', pollController.deletePoll.bind(pollController));
 
 // Vote
-router.post('/create-vote', );
-router.get('/find-vote/:id', );
-router.get('/find-votes', );
-router.put('update-vote/:id', );
-router.delete('/delete-vote/:id', );
+router.post('/create-vote', voteController.createVote.bind(voteController));
+router.get('/find-vote/:id', voteController.getVoteById.bind(voteController));
+router.get('/find-votes', voteController.getAllVotes.bind(voteController));
+router.delete('/delete-vote/:id', voteController.deleteVote.bind(voteController));
 

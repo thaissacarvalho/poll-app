@@ -57,7 +57,7 @@ export class VoteController {
     try {
       const deletedVote = await this.voteService.deleteVote(id);
       if (!deletedVote) {
-        return res.status(404).json({ message: 'Voto não encontrado.' });
+        return res.status(404).json({ message: 'Vote not found' });
       }
       res.status(200).json(deletedVote);
     } catch (error) {

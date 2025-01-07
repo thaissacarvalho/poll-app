@@ -13,9 +13,10 @@ export class PollController {
     try {
       const { durationInMinutes, ...pollData } = req.body;
 
-      // Verifica se a duração foi informada
-      if (!durationInMinutes) {
-        res.status(400).json({ error: "Duração não informada." });
+      // Verifica se a duração foi informada e é válida
+      if (!durationInMinutes || typeof durationInMinutes !== 'number') {
+        res.status(400).json({ error: "Duração não informada ou inválida." });
+        return;
       }
 
       const poll = await this.pollService.createPoll(pollData, durationInMinutes);
@@ -72,6 +73,16 @@ export class PollController {
       res.status(200).json({ message: 'Poll deleted successfully' });
     } catch (error) {
       res.status(500).json(error.message);
+    }
+  }
+
+  async getExpiredPolls(req: Request, res: Response): Promise<void> {
+    try {
+      const expiredPolls = await this.pollService.findExpiredPolls();
+      console.log("Expired Polls: ", expiredPolls);
+      res.status(200).json(expiredPolls);
+    } catch (error) {
+      res.status(500).json({ error: error.message });
     }
   }
 }

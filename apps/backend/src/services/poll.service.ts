@@ -28,4 +28,18 @@ export class PollService {
   async deletePoll(id: string): Promise<Poll | null> {
     return await PollModel.findByIdAndDelete(id);
   }
+
+  async findExpiredPolls(): Promise<Poll[]> {
+    const currentDate = new Date();
+
+    currentDate.setMinutes(currentDate.getMinutes() - 1);
+    
+    currentDate.setSeconds(0, 0);
+  
+    console.log("One minute before the current time (Date with seconds and milliseconds reset): ", currentDate);
+  
+    return await PollModel.find({
+      expiredAt: { $lt: currentDate }
+    });
+  }
 }

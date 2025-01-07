@@ -4,25 +4,25 @@ import { Vote } from "@poll-app/libs";
 
 export class VoteService {
   async createVote(data: Partial<Vote>): Promise<Vote> {
-    const poll = await PollModel.findById(data.pollId);
+    const { pollId, userId, option } = data;
+
+    const poll = await PollModel.findById(pollId);
     if (!poll) {
-      throw new Error("Enquete não encontrada.");
+      throw new Error("Poll not found");
     }
 
-    const existingVote = await VoteModel.findOne({
-      pollId: data.pollId,
-      userId: data.userId,
-    });
-
+    const existingVote = await VoteModel.findOne({ pollId, userId });
     if (existingVote) {
-      throw new Error("Você já votou nesta enquete.");
+      throw new Error("You have already voted in this poll");
     }
 
-    const optionIndex = data.option;
-    const isValidOption = poll.options.some(option => option.text === optionIndex);
-    if (!isValidOption) {
-      throw new Error("Opção inválida.");
+    const optionIndex = poll.options.findIndex(opt => opt.text === option);
+    if (optionIndex === -1) {
+      throw new Error("Invalid option");
     }
+
+    poll.options[optionIndex].votes += 1;
+    await poll.save();
 
     const vote = new VoteModel(data);
     return await vote.save();
