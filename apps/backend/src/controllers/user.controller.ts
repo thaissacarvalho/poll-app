@@ -14,15 +14,15 @@ export class UserController {
     try {
       const { name, username, email, password } = req.body;
 
-      const emailExists = checkEmail(email);
-      const usernameExists = checkUsername(username);
+      const emailExists = await checkEmail(email);
+      const usernameExists = await checkUsername(username);
 
       if (emailExists) {
-        res.status(409).json('Email already exist');
+        res.status(409).json('Email already exists');
       }
 
       if (usernameExists) {
-        res.status(409).json('Username already exist');
+        res.status(409).json('Username already exists');
       }
 
       const user = await this.userService.createUser({ name, username, email, password });
@@ -41,12 +41,12 @@ export class UserController {
       const { id } = req.params;
 
       const user = await this.userService.getUserById(id);
-      
+
       if (!user) {
         res.status(404).json({ error: 'User not found' });
         return;
       }
-      
+
       res.status(200).json(user);
     } catch (error) {
       res.status(500).json(error.message);
@@ -78,7 +78,7 @@ export class UserController {
           res.status(409).json({ message: 'Email already exists.' });
           return;
         }
-      }  
+      }
 
       if (updates.username) {
         const usernameExists = await checkUsername(updates.username);
@@ -89,18 +89,18 @@ export class UserController {
       }
 
       const updateUser = await this.userService.updateUser(id, updates);
-      
+
       if (!updateUser) {
-        res.status(404).json({ error: 'User not found' });
+        res.status(404).json({ message: 'User not found' });
         return;
       }
-      
+
       res.status(200).json({
         message: 'User updated successfully',
-        updateUser
+        user: updateUser
       });
     } catch (error) {
-      res.status(500).json(error.message);
+      res.status(500).json({ message: error.message });
     }
   }
 

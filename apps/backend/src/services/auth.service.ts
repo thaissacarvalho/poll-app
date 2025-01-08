@@ -12,19 +12,19 @@ export class AuthService {
       this.jwtService = new JwtService();
     }
 
-  async login(identifier: string, password: string): Promise<any> {
+  async login(identifier: string, password: string): Promise<string> {
     const user = await UserModel.findOne({
       $or: [{ username: identifier }, { email: identifier }],
     });
 
     if (!user) {
-      throw new Error('Usuário não encontrado');
+      throw new Error('User not found');
     }
 
     const isPasswordValid = await this.bcryptService.comparePassowrd(password, user.password);
 
     if (!isPasswordValid) {
-      throw new Error('Username/email ou senha inválidos.');
+      throw new Error('Username/email or password invalids');
     }
 
     return this.jwtService.generateToken({ id: user._id, username: user.username });

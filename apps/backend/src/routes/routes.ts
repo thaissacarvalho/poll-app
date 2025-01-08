@@ -16,13 +16,13 @@ router.get('/', (req, res) => {
 });
 
 // Login
-router.post('/login', loginController.login);
+router.post('/login', loginController.login.bind(loginController));
 
 // User
 router.post('/create-user', userController.createUser.bind(userController));
 router.get('/find-user/:id', userController.getUserById.bind(userController));
 router.get('/find-users', userController.getAllUsers.bind(userController));
-router.put('update-user/:id', userController.updateUser.bind(userController));
+router.patch('/update-user/:id', userController.updateUser.bind(userController));
 router.delete('/delete-user/:id', userController.deleteUser.bind(userController));
 
 // Poll

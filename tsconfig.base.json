@@ -18,5 +18,9 @@
       "@poll-app/libs": ["apps/libs/src/index.ts"],
     }
   },
+  "include": [
+    "apps/libs/src/**/*",
+    "apps/backend/src/**/*"
+  ],
   "exclude": ["node_modules", "tmp"]
 }
