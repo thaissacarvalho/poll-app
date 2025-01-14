@@ -1,0 +1,276 @@
+openapi: 3.0.0
+info:
+  title: Poll API
+  description: This is a API POLL.
+  version: 1.0.0
+tags:
+  - name: Login
+    description: Endpoints related to user login
+  - name: User
+    description: Endpoints related to user management
+  - name: Poll
+    description: Endpoints related to poll management
+  - name: Vote
+    description: Endpoints related to vote management
+paths:
+  /login:
+    post:
+      tags:
+        - Login
+      summary: User login
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                identifier:
+                  type: string
+                password:
+                  type: string
+      responses:
+        '200':
+          description: Login successful
+        '401':
+          description: Unauthorized
+
+  /create-user:
+    post:
+      tags:
+        - User
+      summary: Create a new user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name: 
+                  type: string
+                username:
+                  type: string
+                email:
+                  type: string
+                password:
+                  type: string
+      responses:
+        '201':
+          description: User created successfully
+
+  /find-user/{id}:
+    get:
+      tags:
+        - User
+      summary: Get user by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: User details returned
+        '404':
+          description: User not found
+
+  /find-users:
+    get:
+      tags:
+        - User
+      summary: Get all users
+      responses:
+        '200':
+          description: List of users returned
+
+  /update-user/{id}:
+    patch:
+      tags:
+        - User
+      summary: Update user by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name: 
+                  type: string
+                username:
+                  type: string
+                email:
+                  type: string
+                password: 
+                  type: string
+      responses:
+        '200':
+          description: User updated successfully
+        '404':
+          description: User not found
+
+  /delete-user/{id}:
+    delete:
+      tags:
+        - User
+      summary: Delete user by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: User deleted successfully
+        '404':
+          description: User not found
+
+  /create-poll:
+    post:
+      tags:
+        - Poll
+      summary: Create a new poll
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                creatorUser: 
+                  type: string
+                question:
+                  type: string
+                options:
+                  type: array
+                  items:
+                    type: string
+      responses:
+        '201':
+          description: Poll created successfully
+
+  /find-poll/{id}:
+    get:
+      tags:
+        - Poll
+      summary: Get poll by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Poll details returned
+        '404':
+          description: Poll not found
+
+  /find-polls:
+    get:
+      tags:
+        - Poll
+      summary: Get all polls
+      responses:
+        '200':
+          description: List of polls returned
+
+  /find-expired-polls:
+    get:
+      tags:
+        - Poll
+      summary: Get all expired polls
+      responses:
+        '200':
+          description: List of expired polls returned
+
+  /delete-poll/{id}:
+    delete:
+      tags:
+        - Poll
+      summary: Delete poll by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Poll deleted successfully
+        '404':
+          description: Poll not found
+
+  /create-vote:
+    post:
+      tags:
+        - Vote
+      summary: Create a new vote
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                pollId:
+                  type: string
+                userId:
+                  type: string
+                option:
+                  type: string
+      responses:
+        '201':
+          description: Vote created successfully
+
+  /find-vote/{id}:
+    get:
+      tags:
+        - Vote
+      summary: Get vote by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Vote details returned
+        '404':
+          description: Vote not found
+
+  /find-votes:
+    get:
+      tags:
+        - Vote
+      summary: Get all votes
+      responses:
+        '200':
+          description: List of votes returned
+
+  /delete-vote/{id}:
+    delete:
+      tags:
+        - Vote
+      summary: Delete vote by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Vote deleted successfully
+        '404':
+          description: Vote not found
