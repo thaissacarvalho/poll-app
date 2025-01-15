@@ -12,10 +12,7 @@ export default function Main({ activeSection, setActiveSection }) {
       {activeSection === 'createPoll' && <CreatePoll />}
       {!activeSection && (
         <section className="flex flex-col items-center justify-center h-screen bg-gray-100 text-center p-4">
-          <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-800 mb-6">
-            ESCOLHA UMA OPÇÃO para começar a navegar no site
-          </h1>
-          <svg
+           <svg
             className="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 text-gray-800 animate-bounce"
             fill="none"
             stroke="currentColor"
@@ -26,9 +23,13 @@ export default function Main({ activeSection, setActiveSection }) {
               strokeLinecap="round"
               strokeLinejoin="round"
               strokeWidth={2}
-              d="M19 9l-7 7-7-7"
+              d="M19 15l-7-7-7 7"
             />
           </svg>
+
+          <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-800 mb-20">
+            ESCOLHA UMA OPÇÃO para começar a navegar no site
+          </h1> 
         </section>
       )}
     </main>
