@@ -4,7 +4,7 @@ export default function Footer() {
       <div className="container mx-auto px-4 text-center">
         <p className="text-sm">
           &copy; <span>{new Date().getFullYear()}</span>
-          <a href="https://www.bythaissa.com" className="hover:underline text-purple-400 ml-1">
+          <a href="https://www.bythaissa.com" className="hover:underline text-purple-400 ml-1" rel="noreferrer" target="_blank" >
             Thaissa Carvalho
           </a>. Todos os direitos reservados.
         </p>
