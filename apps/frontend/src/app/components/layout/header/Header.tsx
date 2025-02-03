@@ -11,7 +11,7 @@ export default function Header({ setActiveSection, activeSection }) {
 
   return (
     <header className="bg-black h-16 flex items-center justify-between p-4 lg:h-[80px]">
-      <a href="/" className="text-3xl text-white">🥸</a>
+      <a href="/" className="text-3xl text-white">Poll</a>
 
       <nav className="relative">
         <button 
@@ -23,7 +23,7 @@ export default function Header({ setActiveSection, activeSection }) {
         <ul className={`absolute bg-black text-white space-y-2 mt-2 p-4 rounded shadow-lg md:flex md:space-x-4 md:static md:space-y-0 md:p-0 md:mt-0 ${menuOpen ? 'block' : 'hidden'}`}>
           <li>
             <button className={buttonStyle} onClick={() => { setActiveSection(activeSection === 'begin' ? '' : 'begin'); setMenuOpen(false); }}>
-              Home
+              Inicio
             </button>
           </li>
           <li>

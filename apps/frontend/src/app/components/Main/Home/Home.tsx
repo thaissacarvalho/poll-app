@@ -1,4 +1,4 @@
-export default function Begin() {
+export default function Home() {
   return (
     <section className="min-h-screen flex flex-col justify-center items-center bg-gray-50 p-6 md:p-12 text-center">
       <h1 className="text-3xl sm:text-4xl font-bold text-gray-800 mb-4">

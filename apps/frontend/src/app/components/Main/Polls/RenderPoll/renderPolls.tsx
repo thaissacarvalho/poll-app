@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function Polls() {
+export default function RenderPolls() {
   return (
     <section>
       <h1>Todas as Enquetes</h1>

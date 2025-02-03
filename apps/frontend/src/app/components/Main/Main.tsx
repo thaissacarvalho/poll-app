@@ -1,7 +1,7 @@
-import CreatePoll from './createPoll/CreatePoll';
-import Begin from './begin/Begin';
-import Login from './login/Login';
-import Polls from './renderPoll/RenderPoll';
+import CreatePoll from './Polls/CreatePoll/createPoll';
+import Begin from './Home/Home';
+import Login from './Account/Account';
+import Polls from './Polls/RenderPoll/renderPolls';
 
 export default function Main({ activeSection, setActiveSection }) {
   return (
