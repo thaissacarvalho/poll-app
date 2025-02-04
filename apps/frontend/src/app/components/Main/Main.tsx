@@ -1,7 +1,7 @@
 import CreatePoll from './Polls/CreatePoll/createPoll';
 import Begin from './Home/Home';
 import Login from './Account/Account';
-import Polls from './Polls/RenderPoll/renderPolls';
+import Polls from './Polls/RenderPoll/RenderPolls';
 
 export default function Main({ activeSection, setActiveSection }) {
   return (

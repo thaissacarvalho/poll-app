@@ -1,13 +1,18 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
+import ButtonSection from '../../ui/ButtonSection';
 
-export default function Header({ setActiveSection, activeSection }) {
+interface HeaderProps {
+  setActiveSection: (section: string) => void; 
+  activeSection: string;
+}
+
+
+export default function Header({ setActiveSection, activeSection }: HeaderProps) {
   const [menuOpen, setMenuOpen] = useState(false);
 
   const handleMenuToggle = () => {
     setMenuOpen(!menuOpen);
   };
-
-  const buttonStyle = "hover:text-blue-400 focus:text-blue-700"
 
   return (
     <header className="bg-black h-16 flex items-center justify-between p-4 lg:h-[80px]">
@@ -21,21 +26,9 @@ export default function Header({ setActiveSection, activeSection }) {
           Home ↓
         </button>
         <ul className={`absolute bg-black text-white space-y-2 mt-2 p-4 rounded shadow-lg md:flex md:space-x-4 md:static md:space-y-0 md:p-0 md:mt-0 ${menuOpen ? 'block' : 'hidden'}`}>
-          <li>
-            <button className={buttonStyle} onClick={() => { setActiveSection(activeSection === 'begin' ? '' : 'begin'); setMenuOpen(false); }}>
-              Inicio
-            </button>
-          </li>
-          <li>
-            <button className={buttonStyle} onClick={() => { setActiveSection(activeSection === 'polls' ? '' : 'polls'); setMenuOpen(false); }}>
-              Enquetes
-            </button>
-          </li>
-          <li>
-            <button className={buttonStyle} onClick={() => { setActiveSection(activeSection === 'login' ? '' : 'login'); setMenuOpen(false); }}>
-              Login
-            </button>
-          </li>
+         <ButtonSection onClick={() => { setActiveSection(activeSection === 'begin' ? '' : 'begin'); setMenuOpen(false); }} name={'Inicio'}/>
+         <ButtonSection onClick={() => { setActiveSection(activeSection === 'polls' ? '' : 'polls'); setMenuOpen(false); }} name={'Enquetes'}/>
+         <ButtonSection onClick={() => { setActiveSection(activeSection === 'login' ? '' : 'login'); setMenuOpen(false); }} name={'Login'}/>
         </ul>
       </nav>
 
