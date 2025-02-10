@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Register from './Register/Register';
 import Login from './Login/Login';
-import ButtonTab from './ButtonTab/ButtonTab';
+import ButtonTab from '../../ui/Button/ButtonTab';
 
 export default function Account() {
   const [activeTab, setActiveTab] = useState('login');

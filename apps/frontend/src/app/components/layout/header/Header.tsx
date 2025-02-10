@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import ButtonSection from '../../ui/ButtonSection';
+import ButtonSection from '../../ui/Button/ButtonSection';
 
 interface HeaderProps {
   setActiveSection: (section: string) => void; 

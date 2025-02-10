@@ -1,4 +1,4 @@
-import CreatePoll from './Polls/CreatePoll/createPoll';
+import CreatePoll from './Polls/CreatePoll/CreatePoll';
 import Begin from './Home/Home';
 import Login from './Account/Account';
 import Polls from './Polls/RenderPoll/RenderPolls';
